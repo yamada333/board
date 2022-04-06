@@ -6,8 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
+
 
 /**
  * 投稿.
@@ -20,17 +24,24 @@ public class Post {
     /** ID */
     @Id
     @Column
+    @NotNull
     private String id = null;
 
     /** 投稿者 */
     @Column(length = 20, nullable = false)
+    @NotEmpty
+    @Size(min = 1, max = 20)
     private String author = null;
 
     /** タイトル */
+    @NotEmpty
+    @Size(min = 1, max = 20)
     @Column(length = 20, nullable = false)
     private String title = null;
 
     /** 内容 */
+    @NotEmpty
+    @Size(min = 1, max = 1000)
     @Column(length = 1000, nullable = false)
     private String body = null;
 
@@ -42,5 +53,6 @@ public class Post {
 
     /** 削除済 */
     private boolean deleted = false;
+    
 
 }
